@@ -1,4 +1,5 @@
-const { urlencoded } = require('express')
+require('dotenv').config()
+
 const express = require('express')
 const router = require('./routes')
 const app = express()

@@ -1,4 +1,4 @@
-const { User, Todo } = require('../models')
+const { Todo } = require('../models')
 
 class TodosController {
     static showAllTodos (req, res) {

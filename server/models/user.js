@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+
+const { hashPassword } = require('../helpers/password-helper');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -61,11 +63,15 @@ module.exports = (sequelize, DataTypes) => {
         if (!instance.last_name) {
           instance.last_name = instance.first_name;
         }
+        
+        instance.password = hashPassword(instance.password);
       },
       beforeUpdate(instance, options) {
         if (!instance.last_name) {
           instance.last_name = instance.first_name;
         }
+        
+        instance.password = hashPassword(instance.password);
       }
     }
   });
