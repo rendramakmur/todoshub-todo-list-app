@@ -3,7 +3,7 @@ class TodosController {
 
     }
 
-    static postAddTodos (req, res) {
+    static createTodo (req, res) {
         
     }
 
