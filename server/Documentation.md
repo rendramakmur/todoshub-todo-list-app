@@ -49,7 +49,6 @@
   {
       "title": "<title to get insert into>",
       "description": "<description to get insert into>",
-      "status": "<status to get insert into>",
       "due_date": "<due_date to get insert into>"
   }
   ```
@@ -73,12 +72,19 @@
 * ## Error Response:
 
   * **Code:** 400 Bad Request <br />
-    **Output:** `{ msg : "<validation requirement message>" }`
+    **Output:** `[
+    {
+        "msg": "Can not set due date before present time"
+    },
+    {
+        "msg": "Title is required"
+    }
+]`
 
   OR
 
   * **Code:** 500 Internal Server Error <br />
-    **Output:** `{ msg : "Internal Server Error" }`
+    **Output:** `{ "msg" : "Internal Server Error" }`
 
 * ## Sample Call:
 
@@ -205,7 +211,7 @@
 * ## Error Response:
 
   * **Code:** 404 Not Found <br />
-    **Output:** `{ msg : "Error Not Found" }`
+    **Output:** `{ "msg": "To-do with id:3 not found!" }`
 
 * ## Sample Call:
 
@@ -275,7 +281,7 @@
   OR
 
   * **Code:** 404 Not Found <br />
-    **Output:** `{ msg : "Error Not Found" }`
+    **Output:** `{ "msg": "To-do with id:3 not found!" }`
   
   OR
 
@@ -343,7 +349,7 @@
   OR
 
   * **Code:** 404 Not Found <br />
-    **Output:** `{ msg : "Error Not Found" }`
+    **Output:** `{ "msg": "To-do with id:3 not found!" }`
   
   OR
 
@@ -398,7 +404,7 @@
 * ## Error Response:
 
   * **Code:** 404 Not Found <br />
-    **Output:** `{ msg : "Error Not Found" }`
+    **Output:** `{ "msg": "To-do with id:3 not found!" }`
   
   OR
 
