@@ -1,5 +1,5 @@
 const { tokenValidation } = require('../helpers/tokenValidation');
-const { User } = require('../models')
+const { User, Todo } = require('../models')
 
 const authentication = (req, res, next) => {
     try {
@@ -24,6 +24,22 @@ const authentication = (req, res, next) => {
 
 const authorization = (req, res, next) => {
     let id = +req.params.id
+
+    Todo.findByPk(id)
+    .then(data => {
+        if (data.UserId === req.currentUser.id) {
+            next()
+        } else {
+            throw {msg: "Unauthorized content"}
+        }
+    })
+    .catch(err => {
+        if (err.msg) {
+            res.status(401).json({msg: err.msg});
+        } else {
+            res.status(404).json(err.message);
+        }
+    })
 };
 
-module.exports = {authentication}
+module.exports = {authentication, authorization}
