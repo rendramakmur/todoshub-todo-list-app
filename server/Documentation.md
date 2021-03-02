@@ -14,7 +14,7 @@
 
 <br />
 
-# POST /todos
+# 1. POST /todos
 **The function of this route is to create a new to-do for user.**
 
 * ## URL:
@@ -72,25 +72,31 @@
 * ## Error Response:
 
   * **Code:** 400 Bad Request <br />
-    **Output:** `[
-    {
-        "msg": "Can not set due date before present time"
-    },
-    {
-        "msg": "Title is required"
-    }
-]`
+    **Output:** 
+    ```
+    [
+      {
+          "msg": "Can not set due date before present time"
+      },
+      {
+          "msg": "Title is required"
+      }
+    ]
+    ```
 
   OR
 
   * **Code:** 500 Internal Server Error <br />
-    **Output:** `{ "msg" : "Internal Server Error" }`
+    **Output:**
+    ```
+    { "msg" : "Internal Server Error" }
+    ```
 
 * ## Sample Call:
 
 <br />
 
-# GET /todos
+# 2. GET /todos
 **This route has a main function to show all to-dos from a user.**
 
 * ## URL:
@@ -153,13 +159,16 @@
 * ## Error Response:
 
   * **Code:** 500 Internal Server Error <br />
-    **Output:** `{ msg : "Internal Server Error" }`
+    **Output:**
+    ```
+    { msg : "Internal Server Error" }
+    ```
 
 * ## Sample Call:
 
 <br />
 
-# GET /todos/:id
+# 3. GET /todos/:id
 **Main function of this route is getting a spesific to-do from a user by to-do id.**
 
 * ## URL:
@@ -174,7 +183,7 @@
 
    **Required:**
 
-   "id" = req.params.id
+   "id" = [integer]
 
 *  ## Request Header
 
@@ -211,13 +220,16 @@
 * ## Error Response:
 
   * **Code:** 404 Not Found <br />
-    **Output:** `{ "msg": "To-do with id:3 not found!" }`
+    **Output:** 
+    ```
+    { "msg": "To-do with id:3 not found!" }
+    ```
 
 * ## Sample Call:
 
 <br />
 
-# PUT /todos/:id
+# 4. PUT /todos/:id
 **This route main function is updating all the record of the to-do title, description, status, and due date.**
 
 * ## URL:
@@ -232,7 +244,7 @@
 
    **Required:**
 
-   "id" = req.params.id
+   "id" = [integer]
 
 *  ## Request Header
 
@@ -276,23 +288,32 @@
 * ## Error Response:
   
   * **Code:** 400 Bad Request <br />
-    **Output:** `{ msg : "<validation requirement message>" }`
+    **Output:**
+    ```
+    { msg : "<validation requirement message>" }
+    ```
 
   OR
 
   * **Code:** 404 Not Found <br />
-    **Output:** `{ "msg": "To-do with id:3 not found!" }`
+    **Output:**
+    ```
+    { "msg": "To-do with id:3 not found!" }
+    ```
   
   OR
 
   * **Code:** 500 Internal Server Error <br />
-    **Output:** `{ msg : "Internal Server Error" }`
+    **Output:**
+    ```
+    { msg : "Internal Server Error" }
+    ```
 
 * ## Sample Call:
 
 <br />
 
-# PATCH /todos/:id
+# 5. PATCH /todos/:id
 **This route main function is updating all the record of the to-do title, description, status, and due date.**
 
 * ## URL:
@@ -307,7 +328,7 @@
 
    **Required:**
 
-   "id" = req.params.id
+   "id" = [integer]
 
 *  ## Request Header
 
@@ -344,23 +365,32 @@
 * ## Error Response:
   
   * **Code:** 400 Bad Request <br />
-    **Output:** `{ msg : "<validation requirement message>" }`
+    **Output:**
+    ```
+    { msg : "<validation requirement message>" }
+    ```
 
   OR
 
   * **Code:** 404 Not Found <br />
-    **Output:** `{ "msg": "To-do with id:3 not found!" }`
+    **Output:**
+    ```
+    { "msg": "To-do with id:3 not found!" }
+    ```
   
   OR
 
   * **Code:** 500 Internal Server Error <br />
-    **Output:** `{ msg : "Internal Server Error" }`
+    **Output:**
+    ```
+    { msg : "Internal Server Error" }
+    ```
 
 * ## Sample Call:
 
 <br />
 
-# DELETE /todos/:id
+# 6. DELETE /todos/:id
 **This route main function is updating all the record of the to-do title, description, status, and due date.**
 
 * ## URL:
@@ -375,7 +405,7 @@
 
    **Required:**
 
-   "id" = req.params.id
+   "id" = [integer]
 
 *  ## Request Header
 
@@ -404,11 +434,17 @@
 * ## Error Response:
 
   * **Code:** 404 Not Found <br />
-    **Output:** `{ "msg": "To-do with id:3 not found!" }`
+    **Output:**
+    ```
+    { "msg": "To-do with id:3 not found!" }
+    ```
   
   OR
 
   * **Code:** 500 Internal Server Error <br />
-    **Output:** `{ msg : "Internal Server Error" }`
+    **Output:**
+    ```
+    { msg : "Internal Server Error" }
+    ```
 
 * ## Sample Call:

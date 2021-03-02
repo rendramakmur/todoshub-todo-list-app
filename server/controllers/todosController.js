@@ -15,8 +15,8 @@ class TodosController {
         let newTodo = {
             title: req.body.title,
             description: req.body.description,
-            due_date: req.body.due_date
-            // UserId belum digenerate
+            due_date: req.body.due_date,
+            UserId: req.currentUser.id
         }
 
         Todo.create(newTodo)
@@ -38,7 +38,7 @@ class TodosController {
     }
 
     static getSpesificTodo (req, res) {
-        let id = req.params.id
+        let id = +req.params.id
 
         Todo.findByPk(id)
         .then(data => {
@@ -58,31 +58,28 @@ class TodosController {
     }
 
     static editSpesificTodo (req, res) {
-        let id = req.params.id
+        let id = +req.params.id
         let updatedTodo = {
             title: req.body.title,
             description: req.body.description,
             due_date: req.body.due_date,
-            status: req.body.status
-            //UserId belum
+            status: req.body.status,
+            UserId: req.currentUser.id
         }
-
-        console.log(updatedTodo);
 
         Todo.update(updatedTodo, {
             where: {
-                "id": id
-            }
+                "id": id,
+            },
+            individualHooks: true,
+            returning: true
         })
         .then(data => {
             if (!data[0]) {
                 throw {msg: `To-do with id:${id} not found!`}
             } else {
-                return Todo.findByPk(id);
+                res.status(200).json(data[1])
             }
-        })
-        .then(data => {
-            res.status(200).json(data);
         })
         .catch(err => {
             if (err.msg) {
@@ -104,7 +101,7 @@ class TodosController {
     }
 
     static changeTodoStatus (req, res) {
-        let id = req.params.id
+        let id = +req.params.id
         let newStatus = {
             status: req.body.status
         };
@@ -112,17 +109,16 @@ class TodosController {
         Todo.update(newStatus, {
             where: {
                 "id": id
-            }
+            },
+            individualHooks: true,
+            returning: true
         })
         .then(data => {
             if (!data[0]) {
                 throw {msg: `To-do with id:${id} not found!`}
             } else {
-                return Todo.findByPk(id);
+                res.status(200).json(data[1]);
             }
-        })
-        .then(data => {
-            res.status(200).json(data);
         })
         .catch(err => {
             if (err.msg) {
@@ -143,7 +139,7 @@ class TodosController {
     }
 
     static deleteTodo (req, res) {
-        let id = req.params.id
+        let id = +req.params.id
 
         Todo.destroy({where: {
             "id": id

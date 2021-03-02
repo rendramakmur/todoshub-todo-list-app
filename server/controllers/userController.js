@@ -1,6 +1,6 @@
 const { comparePassword } = require("../helpers/password-helper");
+const { generateToken } = require("../helpers/tokenValidation");
 const { User } = require('../models')
-const jwt = require('jsonwebtoken')
 
 class UserController {
     static register (req, res) {
@@ -11,7 +11,11 @@ class UserController {
             password: req.body.password
         }
 
-        User.create(newUser)
+        User.create(newUser, {
+            attributes: {
+                exclude: ['password']
+            }
+        })
         .then(data => {
             res.status(201).json(data);
         })
@@ -45,12 +49,9 @@ class UserController {
             } else {
                 comparedStatus = comparePassword(password, data.password)
                 if(comparedStatus) {
-                    const access_token = jwt.sign({
-                        id: data.id,
-                        email: data.email
-                    }, process.env.JWT_SECRET);
+                    const access_token = generateToken(data.id, data.email, process.env.JWT_SECRET)
 
-                    res.status(200).json({id: data.id, email: data.email, access_token})
+                    res.status(200).json({access_token})
                 } else {
                     throw {msg: "email/password invalid"}
                 }
