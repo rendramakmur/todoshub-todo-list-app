@@ -1,17 +1,17 @@
 const { Todo } = require('../models')
 
 class TodosController {
-    static showAllTodos (req, res) {
+    static showAllTodos (req, res, next) {
         Todo.findAll()
         .then(data => {
             res.status(200).json(data);
         })
         .catch(err => {
-            res.status(500).json(err.message);
+            next(err);
         })
     }
 
-    static createTodo (req, res) {
+    static createTodo (req, res, next) {
         let newTodo = {
             title: req.body.title,
             description: req.body.description,
@@ -24,40 +24,23 @@ class TodosController {
             res.status(201).json(data);
         })
         .catch(err => {
-            let errors = [];
-            err.errors.forEach(error => {
-                errors.push({msg: error.message})
-            })
-            
-            if(errors) {
-                res.status(400).json(errors)
-            } else {
-                res.status(500).json(err.message)
-            }
+            next(err);
         })
     }
 
-    static getSpesificTodo (req, res) {
+    static getSpesificTodo (req, res, next) {
         let id = +req.params.id
 
         Todo.findByPk(id)
         .then(data => {
-            if (!data) {
-                throw {msg: `To-do with id:${id} not found!`}
-            } else {
-                res.status(200).json(data)
-            }
+            res.status(200).json(data)
         })
         .catch(err => {
-            if (err.msg) {
-                res.status(404).json({msg: err.msg})
-            } else {
-                res.status(500).json(err.message)
-            }
+            next(err);
         })
     }
 
-    static editSpesificTodo (req, res) {
+    static editSpesificTodo (req, res, next) {
         let id = +req.params.id
         let updatedTodo = {
             title: req.body.title,
@@ -75,32 +58,14 @@ class TodosController {
             returning: true
         })
         .then(data => {
-            if (!data[0]) {
-                throw {msg: `To-do with id:${id} not found!`}
-            } else {
-                res.status(200).json(data[1])
-            }
+            res.status(200).json(data[1])
         })
         .catch(err => {
-            if (err.msg) {
-                res.status(404).json({msg: err.msg});
-            } else {
-                let errors = []
-                err.errors.forEach(error => {
-                    errors.push({msg: error.message})
-                })
-    
-                if (errors) {
-                    res.status(400).json(errors);
-                } else {
-                    res.status(500).json(err.message);
-                }
-            }
-
+            next(err);
         })
     }
 
-    static changeTodoStatus (req, res) {
+    static changeTodoStatus (req, res, next) {
         let id = +req.params.id
         let newStatus = {
             status: req.body.status
@@ -114,49 +79,24 @@ class TodosController {
             returning: true
         })
         .then(data => {
-            if (!data[0]) {
-                throw {msg: `To-do with id:${id} not found!`}
-            } else {
-                res.status(200).json(data[1]);
-            }
+            res.status(200).json(data[1]);
         })
         .catch(err => {
-            if (err.msg) {
-                res.status(404).json({msg: err.msg})
-            } else {
-                let errors = [];
-                err.errors.forEach(error => {
-                    errors.push({msg: error.message})
-                })
-                
-                if (errors) {
-                    res.status(400).json(errors)
-                } else {
-                    res.status(500).json(err.message)
-                }
-            }
+            next(err);
         })
     }
 
-    static deleteTodo (req, res) {
+    static deleteTodo (req, res, next) {
         let id = +req.params.id
 
         Todo.destroy({where: {
             "id": id
         }})
         .then(data => {
-            if (!data) {
-                throw {msg: `To-do with id:${id} not found!`}
-            } else {
-                res.status(200).json({msg: 'Todo success to delete'})
-            }
+            res.status(200).json({msg: 'Todo success to delete'});
         })
         .catch(err => {
-            if (err.msg) {
-                res.status(404).json({msg: err.msg})
-            } else {
-                res.status(500).json({msg: err.message})
-            }
+            next(err);
         })
     }
 }

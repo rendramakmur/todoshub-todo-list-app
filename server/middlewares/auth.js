@@ -11,14 +11,16 @@ const authentication = (req, res, next) => {
             next()
         })
         .catch(err => {
-            throw {msg: `User with id:${decode.id} not found!`}
+            next ({
+                code: 404,
+                msg: `User with id:${decode.id} not found!`
+            })
         })
     } catch (error) {
-        if (error.msg) {
-            res.status(404).json({msg: error.msg});
-        } else {
-            res.status(401).json({msg: "Unauthorized, please login"});
-        }
+        next ({
+            code: 401,
+            msg: "Unauthorizd, please login."
+        })
     }
 };
 
@@ -30,15 +32,17 @@ const authorization = (req, res, next) => {
         if (data.UserId === req.currentUser.id) {
             next()
         } else {
-            throw {msg: "Unauthorized content"}
+            next({
+                code: 401,
+                msg: "Unauthorized content"
+            })
         }
     })
     .catch(err => {
-        if (err.msg) {
-            res.status(401).json({msg: err.msg});
-        } else {
-            res.status(404).json(err.message);
-        }
+        next({
+            code: 404,
+            msg: `To-do with id:${id} not found!`
+        })
     })
 };
 
