@@ -50,7 +50,7 @@ class UserController {
                         email: data.email
                     }, process.env.JWT_SECRET);
 
-                    res.status(200).json({access_token})
+                    res.status(200).json({id: data.id, email: data.email, access_token})
                 } else {
                     throw {msg: "email/password invalid"}
                 }
