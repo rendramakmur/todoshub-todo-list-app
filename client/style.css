@@ -1,0 +1,105 @@
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #FF0266;
+    background-size: cover;
+}
+
+#navbar {
+    background-color: #212121;
+}
+
+.navbar-brand {
+    color: #212121!important;
+}
+
+.bg-dark {
+    background-color: #FF0266!important;
+}
+
+#btn-logout {
+    color: #FF0266;
+    padding: 5px 10px;
+    background-color:#212121;
+    box-shadow: 1px 4px 9px -1px rgba(117,117,117,0.39);
+    border-radius: 4px;
+    transition: 0.5s;
+}
+
+#btn-logout:hover {
+    color: #212121;
+    background-color: #FF0266;
+    border-color: #DDDDDD;
+    box-shadow: 1px 1px 9px 2px rgba(117,117,117,0.39);
+    transition: 0.5s;
+}
+
+/* START LOGIN */
+#login-page {
+    height: 100vh;
+    min-height: 500px;
+    background-color: #FF0266;
+    background-size: cover;
+}
+
+#btn-login {
+    color: #212121;
+    padding: 5px 10px;
+    border-color: #DDDDDD;
+    border-radius: 4px;
+    box-shadow: 1px 4px 9px -1px rgba(117,117,117,0.39);
+}
+
+#btn-login:hover {
+    box-shadow: 1px 1px 9px 2px rgba(117,117,117,0.39);
+}
+
+#btn-register {
+    color: #212121;
+    padding: 5px 10px;
+    border-color: #DDDDDD;
+    border-radius: 4px;
+    box-shadow: 1px 4px 9px -1px rgba(117,117,117,0.39);
+}
+
+#btn-register:hover {
+    box-shadow: 1px 1px 9px 2px rgba(117,117,117,0.39);
+}
+/* END LOGIN */
+
+
+/* START REGISTER */
+#register-page {
+    height: 100vh;
+    min-height: 500px;
+    background-color: #FF0266;
+    background-size: cover;
+}
+
+/* END REGISTER */
+
+/* START TODO */
+
+#main-page {
+    height: 100vh;
+    min-height: 500px;
+    background-color: #FF0266;
+    background-size: cover;
+}
+
+/* END TODO */
+
+/* START TODO CARD */
+
+#btn-edit {
+    color: #212121;
+    padding: 5px 10px;
+    border-color: #DDDDDD;
+    border-radius: 4px;
+    box-shadow: 1px 4px 9px -1px rgba(117,117,117,0.39);
+}
+
+#btn-edit:hover {
+    box-shadow: 1px 1px 9px 2px rgba(117,117,117,0.39);
+}
+
+/* END TODO CARD */

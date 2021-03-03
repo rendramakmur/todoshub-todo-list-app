@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="53065860949-5s7b6q80d92g89ojltm4infij3ffq6kp.apps.googleusercontent.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Fancy To-Do App</title>
+</head>
+<body>
+    <!-- START NAVBAR -->
+    <header id="navbar">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand ms-4" href="#">YOURTODOAPP</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto me-4">
+                  <a class="nav-link" href="#" id="btn-logout">Logout</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <!-- END NAVBAR -->
+
+    <!-- START LOGIN -->
+    <!-- <div class="masthead d-flex align-items-center justify-content-center" id="login-page">
+        <div class="card shadow p-3 mb-5 bg-body rounded">
+            <div class="card-body">
+                <h1 class="text-center mb-3">Login</h1>
+                <form>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="login-email" placeholder="name@example.com">
+                        <label for="login-email">Email</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="login-password  " placeholder="Password">
+                        <label for="login-password  ">Password</label>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <a class="btn mt-3 col-md-7" type="button" href="#" id="btn-login">Login</a>
+                        <a class="btn mt-3 col-md-7" type="button" href="#" id="btn-register">Register</a>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            </div>
+        </div>
+    </div> -->
+    <!-- END LOGIN -->
+
+    <!-- START REGISTER -->
+    <!-- <div class="masthead d-flex align-items-center justify-content-center" id="register-page">
+        <div class="card col-md-6 shadow p-5 mb-5 bg-body rounded">
+            <h1 class="text-center mb-5">Register</h1>
+            <form class="row g-3">
+                <div class="col-md-6">
+                  <label for="register-first-name" class="form-label">First Name*</label>
+                  <input type="text" class="form-control" id="register-first-name">
+                </div>
+                <div class="col-md-6">
+                  <label for="register-last-name" class="form-label">Last Name*</label>
+                  <input type="text" class="form-control" id="register-last-name">
+                </div>
+                <div class="col-12">
+                  <label for="register-email" class="form-label">Email*</label>
+                  <input type="email" class="form-control" id="register-email" placeholder="xxx@gmail.com">
+                </div>
+                <div class="col-12">
+                  <label for="register-password" class="form-label">Password*</label>
+                  <input type="password" class="form-control" id="register-password" placeholder="6 - 16 characters">
+                </div>
+                <div class="col-md-12 d-flex justify-content-center">
+                    <a class="btn me-2" type="button" href="#" id="btn-register">Register</a>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div> -->
+    <!-- END REGISTER -->
+
+    <!-- START TODO -->
+    <div class="m-5" id="main-page">
+        <div class="row">
+            <!-- Start Left Side -->
+            <div class="col-sm-6">
+                <h1>Hi, Rendra</h1>
+            </div>
+            <!-- End Left Side -->
+
+            <!-- Start Right Side -->
+            <div class="card col-sm-6 shadow p-5 mb-5 bg-body rounded overflow-auto" style="height: 575px;">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">To-do list</h3>
+
+                    <!-- Todo card -->
+                    <div class="card col-sm-12 shadow mb-2 bg-body rounded">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="todo-title">Pergi ke como park</h5>
+                                </div>
+                                <!-- Tombol Close -->
+                                <div class="col d-flex justify-content-end">
+                                    <a type="button" class="btn-close" aria-label="Close"></a>
+                                </div>
+                            </div>
+                            <div id='todo-description'>
+                                <p>Pergi ke sana bareng temen.</p>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col d-flex align-items-center">
+                                    <small>Due Date: <span id="todo-due-date">05/03/2020</span></small>
+                                </div>
+                                <!-- Tombol Edit -->
+                                <div class="col d-flex justify-content-end">
+                                    <a class="btn" type="button" href="#" id="btn-edit">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Todo Card -->
+                    
+
+                </div>
+            </div>
+            <!-- End Right Side -->
+
+            <!-- Start Edit Page -->
+            <!-- <div class="card col-sm-6 shadow p-5 mb-5 bg-body rounded overflow-auto" style="height: 575px;">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Edit Todos</h3>
+                    <form class="row g-3">
+                        <div class="col-12">
+                            <label for="edit-todo-title" class="form-label">Title*</label>
+                            <input type="text" class="form-control" id="edit-todo-title">
+                        </div>
+                        <div class="col-12">
+                            <label for="edit-todo-desc" class="form-label">Description*</label>
+                            <input type="text" class="form-control" id="edit-todo-desc" placeholder="xxx@gmail.com">
+                        </div>
+                        <div class="col-12">
+                            <label for="edit-todo-duedate" class="form-label">Due Date*</label>
+                            <input type="date" class="form-control" id="edit-todo-duedate" placeholder="6 - 16 characters">
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <a class="btn me-2" type="button" href="#" id="btn-edit">Submit</a>
+                        </div>
+                    </form>
+                </div>
+            </div> -->
+            <!-- End Edit Page -->
+
+        </div>
+    </div>
+    <!-- END TODO -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./jQuery.js"></script>
+</body>
+</html>

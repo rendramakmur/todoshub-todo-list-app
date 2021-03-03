@@ -3,10 +3,12 @@ const axios = require('axios');
 class APIController {
     static getHolidays(req, res, next) {
         let presentMonth = new Date().getMonth()+1;
+        let presentYear = new Date().getFullYear();
+        let api = process.env.API_HOLIDAY;
 
         axios({
             method: 'GET',
-            url: `https://calendarific.com/api/v2/holidays?&api_key=6312d25328d071897cc8bd5489d48707a5b534ab&country=ID&year=2021&month=${presentMonth}`
+            url: `https://calendarific.com/api/v2/holidays?&api_key=${api}&country=ID&year=${presentYear}&month=${presentMonth}`
         })
         .then(response => {
             let holidayList = response.data.response.holidays

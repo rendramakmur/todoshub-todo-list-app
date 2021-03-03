@@ -2,7 +2,11 @@ const { Todo } = require('../models')
 
 class TodosController {
     static showAllTodos (req, res, next) {
-        Todo.findAll()
+        Todo.findAll({
+            where: {
+                UserId: currentUser.id
+            }
+        })
         .then(data => {
             res.status(200).json(data);
         })
