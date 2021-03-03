@@ -31,74 +31,81 @@
     <!-- END NAVBAR -->
 
     <!-- START LOGIN -->
-    <!-- <div class="masthead d-flex align-items-center justify-content-center" id="login-page">
-        <div class="card shadow p-3 mb-5 bg-body rounded">
-            <div class="card-body">
-                <h1 class="text-center mb-3">Login</h1>
-                <form>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="login-email" placeholder="name@example.com">
-                        <label for="login-email">Email</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="login-password  " placeholder="Password">
-                        <label for="login-password  ">Password</label>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <a class="btn mt-3 col-md-7" type="button" href="#" id="btn-login">Login</a>
-                        <a class="btn mt-3 col-md-7" type="button" href="#" id="btn-register">Register</a>
-                    </div>
-                </form>
-            </div>
-            <div class="d-flex justify-content-center">
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <div class="container" id="login-page">
+        <div class="masthead d-flex align-items-center justify-content-center" id="login-page-css">
+            <div class="card shadow p-3 mb-5 bg-body rounded">
+                <div class="card-body">
+                    <h1 class="text-center mb-3">Login</h1>
+                    <form>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="login-email" placeholder="name@example.com">
+                            <label for="login-email">Email</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="login-password" placeholder="Password">
+                            <label for="login-password">Password</label>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <a class="btn mt-3 col-md-7" type="button" href="#" id="btn-login">Login</a>
+                            <a class="btn mt-3 col-md-7" type="button" href="#" id="btn-register">Register</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- END LOGIN -->
 
     <!-- START REGISTER -->
-    <!-- <div class="masthead d-flex align-items-center justify-content-center" id="register-page">
-        <div class="card col-md-6 shadow p-5 mb-5 bg-body rounded">
-            <h1 class="text-center mb-5">Register</h1>
-            <form class="row g-3">
-                <div class="col-md-6">
-                  <label for="register-first-name" class="form-label">First Name*</label>
-                  <input type="text" class="form-control" id="register-first-name">
+    <div class="container" id="register-page">
+        <div class="masthead d-flex align-items-center justify-content-center" id="register-page-css">
+            <div class="card col-md-6 shadow p-5 mb-5 bg-body rounded">
+                <h1 class="text-center mb-5">Register</h1>
+                <form class="row g-3">
+                    <div class="col-md-6">
+                      <label for="register-first-name" class="form-label">First Name*</label>
+                      <input type="text" class="form-control" id="register-first-name">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="register-last-name" class="form-label">Last Name*</label>
+                      <input type="text" class="form-control" id="register-last-name">
+                    </div>
+                    <div class="col-12">
+                      <label for="register-email" class="form-label">Email*</label>
+                      <input type="email" class="form-control" id="register-email" placeholder="xxx@gmail.com">
+                    </div>
+                    <div class="col-12">
+                      <label for="register-password" class="form-label">Password*</label>
+                      <input type="password" class="form-control" id="register-password" placeholder="6 - 16 characters">
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <a class="btn me-2" type="button" href="#" id="btn-register">Register</a>
+                    </div>
+                  </form>
                 </div>
-                <div class="col-md-6">
-                  <label for="register-last-name" class="form-label">Last Name*</label>
-                  <input type="text" class="form-control" id="register-last-name">
-                </div>
-                <div class="col-12">
-                  <label for="register-email" class="form-label">Email*</label>
-                  <input type="email" class="form-control" id="register-email" placeholder="xxx@gmail.com">
-                </div>
-                <div class="col-12">
-                  <label for="register-password" class="form-label">Password*</label>
-                  <input type="password" class="form-control" id="register-password" placeholder="6 - 16 characters">
-                </div>
-                <div class="col-md-12 d-flex justify-content-center">
-                    <a class="btn me-2" type="button" href="#" id="btn-register">Register</a>
-                </div>
-              </form>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- END REGISTER -->
 
     <!-- START TODO -->
     <div class="m-5" id="main-page">
         <div class="row">
             <!-- Start Left Side -->
-            <div class="col-sm-6">
+            <div class="col-sm-6" id="user-info-page">
                 <h1>Hi, Rendra</h1>
             </div>
             <!-- End Left Side -->
 
             <!-- Start Right Side -->
-            <div class="card col-sm-6 shadow p-5 mb-5 bg-body rounded overflow-auto" style="height: 575px;">
-                <div class="card-body">
+            <div class="card col-sm-6 shadow p-5 mb-5 bg-body rounded overflow-auto" style="height: 575px;" id="todo-list-section">
+                <div class="col-md-12 d-flex justify-content-end">
+                    <a class="btn me-4" type="button" href="#" id="btn-add-todo">Add Todo</a>
+                </div>
+                <div class="card-body" id="todo-list">
                     <h3 class="text-center mb-4">To-do list</h3>
 
                     <!-- Todo card -->
@@ -110,7 +117,7 @@
                                 </div>
                                 <!-- Tombol Close -->
                                 <div class="col d-flex justify-content-end">
-                                    <a type="button" class="btn-close" aria-label="Close"></a>
+                                    <a type="button" class="btn-close" aria-label="Close" id="btn-delete-todo"></a>
                                 </div>
                             </div>
                             <div id='todo-description'>
@@ -123,7 +130,7 @@
                                 </div>
                                 <!-- Tombol Edit -->
                                 <div class="col d-flex justify-content-end">
-                                    <a class="btn" type="button" href="#" id="btn-edit">Edit</a>
+                                    <a class="btn" type="button" href="#" id="btn-edit-todo">Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -135,8 +142,39 @@
             </div>
             <!-- End Right Side -->
 
+            <!-- Start Add Page -->
+            <div class="card col-sm-6 shadow p-5 mb-5 bg-body rounded overflow-auto" style="height: 575px;" id="add-todo-page">
+                <div class="col d-flex justify-content-end">
+                    <a type="button" class="btn-close me-4" aria-label="Close" id="btn-close-add"></a>
+                </div>
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Add Todos</h3>
+                    <form class="row g-3">
+                        <div class="col-12">
+                            <label for="add-todo-title" class="form-label">Title*</label>
+                            <input type="text" class="form-control" id="add-todo-title">
+                        </div>
+                        <div class="col-12">
+                            <label for="add-todo-desc" class="form-label">Description*</label>
+                            <input type="text" class="form-control" id="add-todo-desc">
+                        </div>
+                        <div class="col-12">
+                            <label for="add-todo-duedate" class="form-label">Due Date*</label>
+                            <input type="date" class="form-control" id="add-todo-duedate" placeholder="6 - 16 characters">
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <a class="btn me-2" type="button" href="#" id="btn-add">Submit</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- End Add Page -->
+
             <!-- Start Edit Page -->
-            <!-- <div class="card col-sm-6 shadow p-5 mb-5 bg-body rounded overflow-auto" style="height: 575px;">
+            <div class="card col-sm-6 shadow p-5 mb-5 bg-body rounded overflow-auto" style="height: 575px;" id="edit-todo-page">
+                <div class="col d-flex justify-content-end">
+                    <a type="button" class="btn-close me-4" aria-label="Close" id="btn-close-edit"></a>
+                </div>
                 <div class="card-body">
                     <h3 class="text-center mb-4">Edit Todos</h3>
                     <form class="row g-3">
@@ -146,7 +184,7 @@
                         </div>
                         <div class="col-12">
                             <label for="edit-todo-desc" class="form-label">Description*</label>
-                            <input type="text" class="form-control" id="edit-todo-desc" placeholder="xxx@gmail.com">
+                            <input type="text" class="form-control" id="edit-todo-desc">
                         </div>
                         <div class="col-12">
                             <label for="edit-todo-duedate" class="form-label">Due Date*</label>
@@ -157,7 +195,7 @@
                         </div>
                     </form>
                 </div>
-            </div> -->
+            </div>
             <!-- End Edit Page -->
 
         </div>
@@ -165,6 +203,6 @@
     <!-- END TODO -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./jQuery.js"></script>
+    <script src="./main.js"></script>
 </body>
 </html>

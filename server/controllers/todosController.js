@@ -4,7 +4,7 @@ class TodosController {
     static showAllTodos (req, res, next) {
         Todo.findAll({
             where: {
-                UserId: currentUser.id
+                UserId: req.currentUser.id
             }
         })
         .then(data => {
