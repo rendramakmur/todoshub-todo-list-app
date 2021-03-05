@@ -31,9 +31,9 @@
     <!-- END NAVBAR -->
 
     <!-- START LOGIN -->
-    <div class="container" id="login-page">
+    <div id="login-page">
         <div class="masthead d-flex align-items-center justify-content-center" id="login-page-css">
-            <div class="card shadow p-3 mb-5 bg-body rounded">
+            <div class="card shadow col-md-4 p-3 mb-5 bg-body rounded">
                 <div class="card-body">
                     <h1 class="text-center mb-3">Login</h1>
                     <form>
@@ -63,6 +63,9 @@
     <div class="container" id="register-page">
         <div class="masthead d-flex align-items-center justify-content-center" id="register-page-css">
             <div class="card col-md-6 shadow p-5 mb-5 bg-body rounded">
+                <div class="col d-flex justify-content-end">
+                    <a type="button" class="btn-close" aria-label="Close" id="btn-close-register"></a>
+                </div>
                 <h1 class="text-center mb-5">Register</h1>
                 <form class="row g-3">
                     <div class="col-md-6">
@@ -70,7 +73,7 @@
                       <input type="text" class="form-control" id="register-first-name">
                     </div>
                     <div class="col-md-6">
-                      <label for="register-last-name" class="form-label">Last Name*</label>
+                      <label for="register-last-name" class="form-label">Last Name</label>
                       <input type="text" class="form-control" id="register-last-name">
                     </div>
                     <div class="col-12">
@@ -82,7 +85,7 @@
                       <input type="password" class="form-control" id="register-password" placeholder="6 - 16 characters">
                     </div>
                     <div class="col-md-12 d-flex justify-content-center">
-                        <a class="btn me-2" type="button" href="#" id="btn-register">Register</a>
+                        <a class="btn me-2" type="button" href="#" id="btn-submit-register">Register</a>
                     </div>
                   </form>
                 </div>
@@ -96,7 +99,7 @@
         <div class="row">
             <!-- Start Left Side -->
             <div class="col-sm-6" id="user-info-page">
-                <h1>Hi, Rendra</h1>
+                <h1 id="user-name"></h1>
             </div>
             <!-- End Left Side -->
 
@@ -202,6 +205,7 @@
     </div>
     <!-- END TODO -->
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./main.js"></script>
 </body>

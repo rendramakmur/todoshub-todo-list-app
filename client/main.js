@@ -41,6 +41,27 @@ $("document").ready(()=> {
         e.preventDefault();
         addTodo()
     })
+
+    $("#btn-register").on("click", (e) => {
+        e.preventDefault();
+        $("#login-page").hide();
+        $("#register-page").show();
+    })
+
+    $("#btn-close-register").on("click", (e) => {
+        e.preventDefault();
+        $("#login-page").show();
+        $("#register-page").hide();
+    })
+
+    $("#btn-submit-register").on("click", (e) => {
+        e.preventDefault();
+        // Masukin func post submit disini
+        register();
+    })
+
+    
+
 });
 
 function login () {
@@ -58,10 +79,15 @@ function login () {
     .done(response => {
         console.log(response);
         localStorage.setItem("access_token", response.access_token);
+        localStorage.setItem("name", response.name)
         checkToken()
     })
     .fail(err => {
-        console.log(err);
+        swal({
+            text: err.responseJSON.msg,
+            icon: "warning",
+            button: "Login",
+        });
     })
     .always(() => {
         $("#login-email").val("");
@@ -91,10 +117,19 @@ function checkToken () {
 
 function logout () {
     localStorage.removeItem("access_token");
+    localStorage.removeItem("name");
+
+    // Google account logout
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+
     checkToken();
 }
 
 function fetchTodo () {
+    $("#user-name").text(`Hi, ${localStorage.name}`);
     $("#todo-list").empty();
     $.ajax({
         url: url+'todos',
@@ -143,19 +178,35 @@ function fetchTodo () {
 }
 
 function deleteTodo (id) {
-    $.ajax({
-        url: url+'todos/'+id,
-        method: 'DELETE',
-        headers: {
-            access_token: localStorage.access_token
+    swal({
+        title: "Are you sure?",
+        text: "Once to-do deleted, you will not be able to recover this todo!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                url: url+'todos/'+id,
+                method: 'DELETE',
+                headers: {
+                    access_token: localStorage.access_token
+                }
+            })
+            .done(respone => {
+                fetchTodo();
+            })
+            .fail(err => {
+                console.log(err);
+            })
+        
+            swal("Your to-do file has been deleted!", {
+            icon: "success",
+          });
         }
-    })
-    .done(respone => {
-        fetchTodo();
-    })
-    .fail(err => {
-        console.log(err);
-    })
+    });
+    
 }
 
 function addTodo () {
@@ -181,7 +232,17 @@ function addTodo () {
         $("#todo-list-section").show();
     })
     .fail(err => {
-        console.log(err);
+        let errors = [];
+
+        err.responseJSON.forEach(error => {
+            errors.push(error.msg)
+        })
+
+        swal({
+            text: errors.join('\n'),
+            icon: "warning",
+            button: "Continue",
+        });
     })
     .always(() => {
         $("#add-todo-title").val("")
@@ -222,6 +283,75 @@ function editTodo(id) {
         $("#todo-list-section").show();
     })
     .fail(err => {
+        let errors = [];
+
+        err.responseJSON.forEach(error => {
+            errors.push(error.msg)
+        })
+
+        swal({
+            text: errors.join('\n'),
+            icon: "warning",
+            button: "Continue",
+        });
+    })
+}
+
+function register () {
+    let first_name = $("#register-first-name").val();
+    let last_name = $("#register-last-name").val();
+    let email = $("#register-email").val();
+    let password = $("#register-password").val();
+
+    $.ajax({
+        url: url+'register',
+        method: 'POST',
+        data: {
+            first_name,
+            last_name,
+            email,
+            password
+        }
+    })
+    .done(response => {
+        swal({
+            title: "Register success!",
+            icon: "success",
+            button: "Login",
+        });
+    })
+    .fail(err => {
+        let errors = [];
+
+        err.responseJSON.forEach(error => {
+            errors.push(error.msg)
+        })
+
+        swal({
+            text: errors.join('\n'),
+            icon: "warning",
+            button: "Continue",
+        });
+    })
+
+}
+
+function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+
+    $.ajax({
+        url: url+'google-login',
+        method: 'POST',
+        data: {
+            id_token
+        }
+    })
+    .done(response => {
+        localStorage.setItem("access_token", response.access_token);
+        localStorage.setItem("name", response.name);
+        checkToken();
+    })
+    .fail(err => {
         console.log(err);
     })
-} 
+}
