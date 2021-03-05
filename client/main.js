@@ -60,8 +60,6 @@ $("document").ready(()=> {
         register();
     })
 
-    
-
 });
 
 function login () {
@@ -158,8 +156,16 @@ function fetchTodo () {
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col d-flex align-items-center">
+                            <div class="col-5 d-flex align-items-center">
                                 <small>Due Date: <span id="todo-due-date">${new Date(todo.due_date).toLocaleString('sv-SE', {dateStyle : 'short'})}</span></small>
+                            </div>
+                            <div class="col-3 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="status" id="todo-status" ${todo.status ? 'checked' : ''} onclick="setStatus(${todo.id})">
+                                    <label class="form-check-label" for="todo-status">
+                                    Status
+                                    </label>
+                                </div>
                             </div>
                             <!-- Tombol Edit -->
                             <div class="col d-flex justify-content-end">
@@ -175,6 +181,68 @@ function fetchTodo () {
     .fail(err => {
         console.log(err);
     })
+}
+
+function setStatus (id) {
+    let todoStatus;
+    
+    if ($("#todo-status").is(':checked')) {
+        todoStatus = true;
+
+        $.ajax({
+            url: url+'todos/'+id,
+            method: 'PATCH',
+            headers: {
+                access_token: localStorage.access_token
+            },
+            data: {
+                status: todoStatus
+            }
+        })
+        .done(response => {
+            console.log(response);
+            swal({
+                title: "Good job!",
+                text: "You've done this to-do!",
+                icon: "success",
+                button: "Continue",
+            });
+            
+            fetchTodo();
+        })
+        .fail(err => {
+            console.log(err);
+        })
+
+    } else {
+        todoStatus = false;
+        
+        $.ajax({
+            url: url+'todos/'+id,
+            method: 'PATCH',
+            headers: {
+                access_token: localStorage.access_token
+            },
+            data: {
+                status: todoStatus
+            }
+        })
+        .done(response => {
+            console.log(response);
+            swal({
+                title: "Changed your mind?",
+                text: "Well, we grant your request to undone the to-do.",
+                icon: "success",
+                button: "Continue",
+            });
+
+            fetchTodo();
+        })
+        .fail(err => {
+            console.log(err);
+        })
+
+    }
 }
 
 function deleteTodo (id) {
@@ -277,7 +345,6 @@ function editTodo(id) {
         }
     })
     .done(response => {
-        console.log(response);
         fetchTodo();
         $("#edit-todo-page").hide();
         $("#todo-list-section").show();
