@@ -128,6 +128,10 @@ function logout () {
 
 function fetchTodo () {
     $("#user-name").text(`Hi, ${localStorage.name}`);
+    $("#present-date").text(` ${new Date().toLocaleString('sv-SE', {dateStyle: 'short'})}`)
+    startTime();
+    fetchHoliday();
+
     $("#todo-list").empty();
     $.ajax({
         url: url+'todos',
@@ -421,4 +425,46 @@ function onSignIn(googleUser) {
     .fail(err => {
         console.log(err);
     })
+}
+
+function fetchHoliday() {
+    $.ajax({
+        url: url+'api/holidays',
+        method: 'GET',
+    })
+    .done(response => {
+        $("#holiday-container").empty();
+
+        response.forEach(holiday => {
+            $("#holiday-container").append(
+                `
+                <div class="card shadow mb-1 bg-body rounded">
+                    <div class="card-body">
+                    <p><span style="color: red;">${holiday.date}</span> ::: ${holiday.name}</p>
+                    </div>
+                </div>
+                `
+            )
+        })
+        console.log(response);
+    })
+    .fail(err => {
+        console.log(err);
+    })
+}
+
+function startTime() {
+    let today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+    let s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    $("#present-time").text(`${h} : ${m} : ${s}`)
+    let t = setTimeout(startTime, 500);
+}
+
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};
+    return i;
 }
