@@ -10,11 +10,215 @@
   - NodeJS
   - Sequelize
   - PostgreSQL
+
+  ## RESTful endpoints
+    POST /register
+    POST /login
+    POST /google-login
+    POST /todos
+    GET /todos
+    GET /todos/:id
+    PUT /todos/:id
+    PATCH /todos/:id
+    DELETE /todos/:id
+    GET /api/holidays
+
+
 ----
+
+# 1. POST /register
+**If you want to create new user, use this endpoint.**
+
+* ## URL:
+
+  /register
+
+* ## Method:
+
+  `POST`
+
+*  ## URL Params
+
+   None
+
+*  ## Request Header
+
+   None
+
+* ## Request Body
+
+  **Required:**
+
+  ```
+  {
+      "first_name": "<first_name to get insert into>",
+      "last_name": "<last_name to get insert into>",
+      "email": "<email to get insert into>",
+      "password": "<password to get insert into>"
+  }
+  ```
+
+* ## Success Response:
+
+  * **Code:** 201<br/>
+    **Output:**
+    ```
+    {
+        "id": <given id by system>,
+        "first_name": "<posted first_name>",
+        "last_name": "<posted last_name>",
+        "email": "<posted email>"
+    }
+    ```
+
+* ## Error Response:
+
+  * **Code:** 400 Bad Request <br />
+    **Output:** 
+    ```
+    [
+      {
+          "msg": "First Name is required"
+      },
+      {
+          "msg": "Email is required"
+      },
+      {
+          "msg": "Password is required"
+      },
+      {
+          "msg": "Password length must be between 6 to 16 characters"
+      },
+      {
+          "msg": "Must be in email format"
+      }
+    ]
+    ```
+
+  OR
+
+  * **Code:** 500 Internal Server Error <br />
+    **Output:**
+    ```
+    { "msg" : "Internal Server Error" }
+    ```
 
 <br />
 
-# 1. POST /todos
+# 2. POST /login
+**This is the log in endpoint**
+
+* ## URL:
+
+  /login
+
+* ## Method:
+
+  `POST`
+
+*  ## URL Params
+
+   None
+
+*  ## Request Header
+
+   None
+
+* ## Request Body
+
+  **Required:**
+
+  ```
+  {
+      "email": "<email to get insert into>",
+      "password": "<password to get insert into>"
+  }
+  ```
+
+* ## Success Response:
+
+  * **Code:** 200<br/>
+    **Output:**
+    ```
+    {
+        access_token: <generated access token>,
+        name: <user full name (first name + last name)>
+    }
+    ```
+
+* ## Error Response:
+
+  * **Code:** 400 Bad Request <br />
+    **Output:** 
+    ```
+    [
+      {
+          "msg": "Email/password is invalid"
+      }
+    ]
+    ```
+
+  OR
+
+  * **Code:** 500 Internal Server Error <br />
+    **Output:**
+    ```
+    { "msg" : "Internal Server Error" }
+    ```
+
+<br />
+
+# 3. POST /google-login
+**This endpoint will create user if user didn't exist on database and logged in user if the user already in the database using Google OAuth2**
+
+* ## URL:
+
+  /google-login
+
+* ## Method:
+
+  `POST`
+
+*  ## URL Params
+
+   None
+
+*  ## Request Header
+
+   None
+
+* ## Request Body
+
+  **Required:**
+
+  ```
+  {
+      "token_id": "<token_id generted by Google>"
+  }
+  ```
+
+* ## Success Response:
+
+  * **Code:** 200<br/>
+    **Output:**
+    ```
+    {
+        access_token: <generated access token>,
+        name: <user full name from Google Account>
+    }
+    ```
+
+* ## Error Response:
+
+  * **Code:** 500 Internal Server Error <br />
+    **Output:**
+    ```
+    { "msg" : "Internal Server Error" }
+    ```
+
+<br />
+
+# 4. POST /todos
 **The function of this route is to create a new to-do for user.**
 
 * ## URL:
@@ -37,7 +241,7 @@
 
    ```
    {
-       "Content-type": "application/json"
+       "headers": "access_token"
    }
    ```
 
@@ -92,11 +296,9 @@
     { "msg" : "Internal Server Error" }
     ```
 
-* ## Sample Call:
-
 <br />
 
-# 2. GET /todos
+# 5. GET /todos
 **This route has a main function to show all to-dos from a user.**
 
 * ## URL:
@@ -119,7 +321,7 @@
 
    ```
    {
-       "Content-type": "application/json"
+       "headers": "access_token"
    }
    ```
 
@@ -164,11 +366,9 @@
     { msg : "Internal Server Error" }
     ```
 
-* ## Sample Call:
-
 <br />
 
-# 3. GET /todos/:id
+# 6. GET /todos/:id
 **Main function of this route is getting a spesific to-do from a user by to-do id.**
 
 * ## URL:
@@ -191,7 +391,7 @@
 
    ```
    {
-       "Content-type": "application/json"
+       "headers": "access_token"
    }
    ```
 
@@ -225,11 +425,9 @@
     { "msg": "To-do with id:3 not found!" }
     ```
 
-* ## Sample Call:
-
 <br />
 
-# 4. PUT /todos/:id
+# 7. PUT /todos/:id
 **This route main function is updating all the record of the to-do title, description, status, and due date.**
 
 * ## URL:
@@ -252,7 +450,7 @@
 
    ```
    {
-       "Content-type": "application/json"
+       "headers": "access_token"
    }
    ```
 
@@ -309,11 +507,9 @@
     { msg : "Internal Server Error" }
     ```
 
-* ## Sample Call:
-
 <br />
 
-# 5. PATCH /todos/:id
+# 8. PATCH /todos/:id
 **This route main function is updating all the record of the to-do title, description, status, and due date.**
 
 * ## URL:
@@ -336,7 +532,7 @@
 
    ```
    {
-       "Content-type": "application/json"
+       "headers": "access_token"
    }
    ```
 
@@ -386,11 +582,9 @@
     { msg : "Internal Server Error" }
     ```
 
-* ## Sample Call:
-
 <br />
 
-# 6. DELETE /todos/:id
+# 9. DELETE /todos/:id
 **This route main function is updating all the record of the to-do title, description, status, and due date.**
 
 * ## URL:
@@ -413,7 +607,7 @@
 
    ```
    {
-       "Content-type": "application/json"
+       "headers": "access_token"
    }
    ```
 
@@ -447,4 +641,59 @@
     { msg : "Internal Server Error" }
     ```
 
-* ## Sample Call:
+<br />
+
+# 10. DELETE /api/holidays
+**This route is hitting 3rd party API and generating national holidays based on current month.**
+
+* ## URL:
+
+  /api/holidays
+
+* ## Method:
+
+  `GET`
+
+*  ## URL Params
+
+   None
+
+*  ## Request Header
+
+   None
+
+* ## Request Body
+
+  None
+
+* ## Success Response:
+
+  * **Code:** 200<br/>
+    **Output:**
+    ```
+    [
+      {
+          "name": "Ascension of the Prophet Muhammad",
+          "date": "2021-03-11",
+          "type": "National holiday"
+      },
+      {
+          "name": "Cuti Bersama",
+          "date": "2021-03-12",
+          "type": "National holiday"
+      },
+      {
+          "name": "Bali's Day of Silence and Hindu New Year",
+          "date": "2021-03-14",
+          "type": "National holiday"
+      }
+    ]
+    ```
+
+* ## Error Response:
+
+  * **Code:** 500 Internal Server Error <br />
+    **Output:**
+    ```
+    { msg : "Internal Server Error" }
+    ```

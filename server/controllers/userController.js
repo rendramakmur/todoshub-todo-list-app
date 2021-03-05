@@ -12,13 +12,14 @@ class UserController {
             password: req.body.password
         }
 
-        User.create(newUser, {
-            attributes: {
-                exclude: ['password']
-            }
-        })
+        User.create(newUser)
         .then(data => {
-            res.status(201).json(data);
+            res.status(201).json({
+                id: data.id,
+                first_name: data.first_name,
+                last_name: data.last_name,
+                email: data.email
+            });
         })
         .catch(err => {
             next(err)
