@@ -1,4 +1,4 @@
-let url = 'http://localhost:3000/'
+let url = 'https://todoshub.herokuapp.com/'
 
 $("document").ready(()=> {
     checkToken();
