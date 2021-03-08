@@ -19,7 +19,7 @@ const authentication = (req, res, next) => {
     } catch (error) {
         next ({
             code: 401,
-            msg: "Unauthorizd, please login."
+            msg: "Unauthorized, please login."
         })
     }
 };
