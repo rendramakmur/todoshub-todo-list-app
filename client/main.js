@@ -395,10 +395,13 @@ function register () {
     })
     .fail(err => {
         let errors = [];
-
-        err.responseJSON.forEach(error => {
-            errors.push(error.msg)
-        })
+        if (Array.isArray(err.responseJSON)) {
+            err.responseJSON.forEach(error => {
+                errors.push(error.msg)
+            })
+        } else {
+            errors.push(err.responseJSON);
+        }
 
         swal({
             text: errors.join('\n'),
