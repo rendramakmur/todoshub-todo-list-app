@@ -390,6 +390,8 @@ function register () {
             icon: "success",
             button: "Login",
         });
+        $("#login-page").show();
+        $("#register-page").hide();
     })
     .fail(err => {
         let errors = [];
@@ -403,6 +405,12 @@ function register () {
             icon: "warning",
             button: "Continue",
         });
+    })
+    .always(() => {
+        $("#register-first-name").val('');
+        $("#register-last-name").val('');
+        $("#register-email").val('');
+        $("#register-password").val('');
     })
 
 }
@@ -446,7 +454,6 @@ function fetchHoliday() {
                 `
             )
         })
-        console.log(response);
     })
     .fail(err => {
         console.log(err);

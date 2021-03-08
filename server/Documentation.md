@@ -643,7 +643,7 @@
 
 <br />
 
-# 10. DELETE /api/holidays
+# 10. GET /api/holidays
 **This route is hitting 3rd party API and generating national holidays based on current month.**
 
 * ## URL:
